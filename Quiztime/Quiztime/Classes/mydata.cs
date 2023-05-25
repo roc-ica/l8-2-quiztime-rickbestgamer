@@ -13,7 +13,8 @@ namespace Quiztime.Classes
     public class mydata
     {
         private MySqlConnection conn;
-        public mydata() {
+        public mydata()
+        {
             string myConnectionString = "server=localhost;uid=quiztimeuser;" +
                 "pwd=quiztime;database=quiztime";
 
@@ -32,17 +33,22 @@ namespace Quiztime.Classes
         public void test()
         {
             string sql = @"select * from quiz";
-            MySqlCommand cmd = new MySqlCommand(sql,conn);
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
             //cmd.Parameters.Add("@name",MySqlDbType.VarChar).Value = name;
             //cmd.Parameters.Add("@picture", MySqlType.VarChar).Value = surname;
             MySqlDataReader reader = cmd.ExecuteReader();
-            var cquiz = new cQuiz();
-            while(reader.Read())
+            var cquiz = new List<cQuiz>();
+            while (reader.Read())
             {
-                cquiz.name = (string)reader["name"];
+                cquiz.Add(new cQuiz());
+                cquiz[cquiz.Count - 1].name = (string)reader["name"];
+                cquiz[cquiz.Count - 1].picture = (string)reader["picture"];
             }
-            while(cquiz.name.)
-            Console.WriteLine(cquiz.name);
+            foreach (var item in cquiz)
+            {
+                Console.WriteLine(item.name);
+                Console.WriteLine(item.picture);
+            }
         }
     }
 }

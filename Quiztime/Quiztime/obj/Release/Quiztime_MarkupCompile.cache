@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\
+C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Release\
 Quiztime
 none
 false
-DEBUG;TRACE
+TRACE
 C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\App.xaml
 3221634470
 
@@ -16,5 +16,5 @@ C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\App.xam
 29-1964683040
 MainWindow.xaml;Pages\controls.xaml;Pages\QuizCreate.xaml;
 
-False
+True
 

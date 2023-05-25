@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Quiztime",
+    "\\Quiztime\\Quiztime",
+    "\\Quiztime\\Quiztime\\Classes"
   ],
+  "SelectedNode": "\\Quiztime\\Quiztime\\Classes\\mydata.cs",
   "PreviewInSolutionExplorer": false
 }
