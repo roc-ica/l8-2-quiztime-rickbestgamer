@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Quiztime"
         mc:Ignorable="d"
         WindowState = "Maximized"
-        WindowStyle = "None"
+        WindowStyle="None"
         Title="MainWindow" Height="450" Width="800">
     <Grid RenderTransformOrigin="1,0">
         <Grid.RowDefinitions>
@@ -29,9 +29,48 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="4" Grid.Row="0" VerticalAlignment="Stretch" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Click="CloseProgram">
+                <Path x:Name="ButtonPath"
+                  Margin="3"
+                  Stroke="White"
+                  StrokeThickness="2"
+                  StrokeStartLineCap="Square"
+                  StrokeEndLineCap="Square"
+                  Stretch="Uniform"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathGeometry.Figures>
+                                <PathFigure StartPoint="0,0">
+                                    <LineSegment Point="25,25"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="0,25">
+                                    <LineSegment Point="25,0"/>
+                                </PathFigure>
+                            </PathGeometry.Figures>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+            </Button>
+
+        </Grid>
         <Button Content="Button" Grid.Column="2" Grid.Row="4" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}" Click="Button_Click"/>
         <Button Content="Button" Grid.Column="2" Grid.Row="5" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}"/>
-        <Button Content="x" Grid.Column="4" Grid.Row="0" VerticalAlignment="Top" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Click="CloseProgram"/>
         <Image Source="/Media/quiz.jpg" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
 
     </Grid>
