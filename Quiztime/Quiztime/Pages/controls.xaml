@@ -9,6 +9,30 @@
         WindowStyle = "None"
         Title="controls" Height="450" Width="800" Background="#FF232323">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ItemsControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Style="{DynamicResource MainGrid}"></ItemsControl>
         
+        <Button Content="Next Question" Grid.Column="2" Grid.Row="8" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" TextAlignment="Center"><Run Text="Question counter"/><LineBreak/><Run Language="en-gb" Text="1/10"/></TextBlock>
+
     </Grid>
 </Window>

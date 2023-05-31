@@ -45,3 +45,7 @@ C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Deb
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Quiztime.csproj.CopyComplete
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\settings.g.cs
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\settings.baml
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizPlay.g.cs
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizPlay.baml

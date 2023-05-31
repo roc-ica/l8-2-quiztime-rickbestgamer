@@ -4,9 +4,13 @@
              xmlns:local="clr-namespace:Quiztime"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="{x:Type Window}">
+        
+        
+        <Style x:Key="MainWindow" TargetType="{x:Type Window}">
             <Setter Property="Background" Value="#FF232323"></Setter>
         </Style>
+        
+        
         <Style TargetType="Button" x:Key="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -23,26 +27,160 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
         <Style TargetType="Button" x:Key="CloseButton">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Border
-                                Background="Red"
                                 BorderThickness="0">
-
                             </Border>
-                            <ContentPresenter
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-
-                            </ContentPresenter>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Width" Value="25"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Background" Value="#00000000"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+
+
+        <Style TargetType="ItemsControl" x:Key="MainGrid">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid RenderTransformOrigin="0,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="4" Grid.Row="0" VerticalAlignment="Top" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Click="CloseProgram">
+                                <Path x:Name="CloseButtonPath"
+                                            Margin="3"
+                                            Stroke="White"
+                                            StrokeThickness="2"
+                                            StrokeStartLineCap="Square"
+                                            StrokeEndLineCap="Square"
+                                            Stretch="Uniform"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigure StartPoint="0,0">
+                                                    <LineSegment Point="25,25"/>
+                                                </PathFigure>
+                                                <PathFigure StartPoint="0,25">
+                                                    <LineSegment Point="25,0"/>
+                                                </PathFigure>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                            </Button>
+                            <Button Grid.Column="4" Grid.Row="0" VerticalAlignment="Top" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Click="OpenSettings">
+                                <Path x:Name="ButtonPath"
+                                            Margin="3"
+                                            Stroke="White"
+                                            StrokeThickness="1"
+                                            StrokeStartLineCap="Square"
+                                            StrokeEndLineCap="Square"
+                                            Stretch="Uniform"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <Path.Data>
+                                        <GeometryGroup>
+                                            <CombinedGeometry>
+                                                <CombinedGeometry.Geometry1>
+                                                    <CombinedGeometry GeometryCombineMode="Exclude">
+                                                        <CombinedGeometry.Geometry1>
+                                                            <EllipseGeometry Center="20 20" RadiusX="16" RadiusY="16"/>
+                                                        </CombinedGeometry.Geometry1>
+                                                        <CombinedGeometry.Geometry2>
+                                                            <EllipseGeometry Center="20 20" RadiusX="8" RadiusY="8"/>
+                                                        </CombinedGeometry.Geometry2>
+                                                    </CombinedGeometry>
+                                                </CombinedGeometry.Geometry1>
+                                                <CombinedGeometry.Geometry2>
+                                                    <GeometryGroup>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5"/>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="45" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="90" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="135" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="180" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="225" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="270" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                        <PathGeometry Figures="M15.5,5 L16,0 L24,0 L24.5,5">
+                                                            <PathGeometry.Transform>
+                                                                <RotateTransform Angle="315" CenterX="20" CenterY="20"></RotateTransform>
+                                                            </PathGeometry.Transform>
+                                                        </PathGeometry>
+                                                    </GeometryGroup>
+                                                </CombinedGeometry.Geometry2>
+                                            </CombinedGeometry>
+                                        </GeometryGroup>
+                                    </Path.Data>
+                                </Path>
+                            </Button>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="QuizHeader" TargetType="Border">
+
+        </Style>
+        
+        
     </Application.Resources>
 </Application>

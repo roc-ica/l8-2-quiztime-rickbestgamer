@@ -36,10 +36,16 @@ namespace Quiztime
             System.Environment.Exit(0);
         }
 
+        private void StartQuiz(object sender, RoutedEventArgs e)
+        {
+            Window controlsPage = new Pages.controls();
+            controlsPage.Show();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window w1 = new QuizCreate();
-            w1.Show();
+            Window quizplay = new QuizPlay();
+            quizplay.Show();
         }
     }
 }
