@@ -12,7 +12,9 @@ namespace Quiztime.Classes
 {
     public class mydata
     {
-        private MySqlConnection conn;
+        public static List<cQuiz> Quiz = new List<cQuiz>();
+        public static Int32 SelectedQuiz;
+        private MySqlConnection Conn;
         public mydata()
         {
             string myConnectionString = "server=localhost;uid=quiztimeuser;" +
@@ -20,34 +22,30 @@ namespace Quiztime.Classes
 
             try
             {
-                conn = new MySql.Data.MySqlClient.MySqlConnection();
-                conn.ConnectionString = myConnectionString;
-                conn.Open();
+                Conn = new MySqlConnection();
+                Conn.ConnectionString = myConnectionString;
+                Conn.Open();
             }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        public void test()
+        public void Test()
         {
             string sql = @"select * from quiz";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlCommand cmd = new MySqlCommand(sql, Conn);
             //cmd.Parameters.Add("@name",MySqlDbType.VarChar).Value = name;
             //cmd.Parameters.Add("@picture", MySqlType.VarChar).Value = surname;
             MySqlDataReader reader = cmd.ExecuteReader();
-            var cquiz = new List<cQuiz>();
             while (reader.Read())
             {
-                cquiz.Add(new cQuiz());
-                cquiz[cquiz.Count - 1].name = (string)reader["name"];
-                cquiz[cquiz.Count - 1].picture = (string)reader["picture"];
-            }
-            foreach (var item in cquiz)
-            {
-                Console.WriteLine(item.name);
-                Console.WriteLine(item.picture);
+                Quiz.Add(new cQuiz());
+                Quiz[Quiz.Count - 1].Id = (Int32)reader["id"];
+                Quiz[Quiz.Count - 1].Name = (string)reader["name"];
+                Quiz[Quiz.Count - 1].Picture = (string)reader["picture"];
+                Quiz[Quiz.Count - 1].Updated = (DateTime)reader["updated"];
             }
         }
     }

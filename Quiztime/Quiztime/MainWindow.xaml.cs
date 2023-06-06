@@ -26,20 +26,23 @@ namespace Quiztime
         {
             InitializeComponent();
             mydata md = new mydata();
-            md.test();
+            md.Test();
+            Console.WriteLine("list;");
+            Console.WriteLine(mydata.Quiz.ToString());
 
 
         }
 
         private void CloseProgram(object sender, RoutedEventArgs e)
         {
-            System.Environment.Exit(0);
+            Environment.Exit(0);
+
         }
 
         private void StartQuiz(object sender, RoutedEventArgs e)
         {
-            Window controlsPage = new Pages.controls();
-            controlsPage.Show();
+            Window QuizSelectPage = new QuizSelect();
+            QuizSelectPage.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

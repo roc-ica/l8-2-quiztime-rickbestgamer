@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quiztime.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,16 @@ namespace Quiztime.Pages
         public QuizPlay()
         {
             InitializeComponent();
+            if (mydata.SelectedQuiz != 0)
+            {
+                foreach (var item in mydata.Quiz)
+                {
+                    if (item.Id == mydata.SelectedQuiz)
+                    {
+                        QuizTitle.Text = item.Name;
+                    }
+                }
+            }
         }
     }
 }

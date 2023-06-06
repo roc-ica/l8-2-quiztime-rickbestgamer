@@ -49,3 +49,5 @@ C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Deb
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\settings.baml
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizPlay.g.cs
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizPlay.baml
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizSelect.g.cs
+C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Debug\Pages\QuizSelect.baml

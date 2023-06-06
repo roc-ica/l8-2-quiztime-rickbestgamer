@@ -10,8 +10,10 @@ namespace Quiztime.Classes
     {
         public cQuiz() { }
 
-        public string name { get; set; }
-        public string picture { get; set; }
+        public Int32 Id { get; set; }
+        public string Name { get; set; }
+        public string Picture { get; set; }
+        public DateTime Updated { get; set; }
     }
     public class Box
     {

@@ -32,7 +32,7 @@
         
         <ItemsControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Style="{DynamicResource MainGrid}"></ItemsControl>
 
-        <Button Content="Button" Grid.Column="2" Grid.Row="4" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}" Click="StartQuiz"/>
+        <Button Content="Choose quiz" Grid.Column="2" Grid.Row="4" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}" Click="StartQuiz"/>
         <Button Content="Button" Grid.Column="2" Grid.Row="5" BorderThickness="0,0,0,0" Margin="5" Style="{StaticResource Button}" Click="Button_Click"/>
         <Image Source="/Media/quiz.jpg" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
 
