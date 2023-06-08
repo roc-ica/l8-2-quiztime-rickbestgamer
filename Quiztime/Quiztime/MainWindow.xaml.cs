@@ -27,28 +27,38 @@ namespace Quiztime
             InitializeComponent();
             mydata md = new mydata();
             md.Test();
+            QuizGrid.ItemsSource = mydata.Quiz;
             Console.WriteLine("list;");
             Console.WriteLine(mydata.Quiz.ToString());
 
 
         }
 
-        private void CloseProgram(object sender, RoutedEventArgs e)
+         private void OpenQuiz(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
-
+            mydata.SelectedQuiz = (int)((Button)sender).Tag;
+            Window QuizPlay = new QuizPlay();
+            QuizPlay.Show();
         }
 
-        private void StartQuiz(object sender, RoutedEventArgs e)
+        private void CheckQuiz(object sender, RoutedEventArgs e)
         {
-            Window QuizSelectPage = new QuizSelect();
-            QuizSelectPage.Show();
+            mydata.SelectedQuiz = (int)((Button)sender).Tag;
+            Window QuizPlay = new QuizPlay();
+            QuizPlay.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EditQuiz(object sender, RoutedEventArgs e)
         {
-            Window quizplay = new QuizPlay();
-            quizplay.Show();
+            mydata.SelectedQuiz = (int)((Button)sender).Tag;
+            Window QuizPlay = new QuizPlay();
+            QuizPlay.Show();
+        }
+
+        private void OpenAddQuiz(object sender, RoutedEventArgs e)
+        {
+            Window AddQuiz = new QuizCreate();
+            AddQuiz.Show();
         }
     }
 }

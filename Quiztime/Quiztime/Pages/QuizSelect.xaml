@@ -28,7 +28,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ItemsControl Grid.ColumnSpan="9" Style="{DynamicResource MainGrid}"></ItemsControl>
-        <DataGrid x:Name="QuizGrid" Grid.Row="2" Grid.RowSpan="7" Grid.Column="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}">
+        <DataGrid x:Name="QuizGrid" Grid.Row="1" Grid.RowSpan="7" Grid.Column="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Picture" IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -62,5 +62,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Column="2" Grid.Row="9" Content="Add new Quiz" Style="{DynamicResource Button}" Click="OpenAddQuiz"></Button>
     </Grid>
 </Window>

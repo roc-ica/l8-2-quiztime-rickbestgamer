@@ -46,5 +46,11 @@ namespace Quiztime.Pages
             Window QuizPlay = new QuizPlay();
             QuizPlay.Show();
         }
+
+        private void OpenAddQuiz(object sender, RoutedEventArgs e)
+        {
+            Window AddQuiz = new QuizCreate();
+            AddQuiz.Show();
+        }
     }
 }
