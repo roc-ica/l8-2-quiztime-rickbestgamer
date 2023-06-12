@@ -50,10 +50,10 @@
         </Border>
         <Grid Name="Timer" Grid.Column="4" Grid.Row="4">
             <TextBlock Text="10" Foreground="#FFFF74EA" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Path Data="M25,0 A25,25 90 0 1 25,50 l-25,0 Z" Fill="Orange"/>
-            <Path Data="M50,25 A25,25 90 0 1 25,50 l0,-25 Z" Fill="Red"/>
-            <Path Data="M25,50 A25,25 90 0 1 0,25 l25,0 Z" Fill="Blue"/>
-            <Path Data="M0,25 A25,25 90 0 1 25,0 l0,25 Z" Fill="Green"/>
+            <Path Data="M25,0 A25,25 90 0 1 25,50" Fill="Orange"/>
+            <Path Data="M50,25 A25,25 90 0 1 25,50" Fill="Red"/>
+            <Path Data="M25,50 A25,25 90 0 1 0,25" Fill="Blue"/>
+            <Path Data="M0,25 A25,25 90 0 1 25,0" Fill="Green"/>
         </Grid>
         <Border Grid.Row="8" Grid.RowSpan="3" Grid.ColumnSpan="10">
             <Border.Background>
