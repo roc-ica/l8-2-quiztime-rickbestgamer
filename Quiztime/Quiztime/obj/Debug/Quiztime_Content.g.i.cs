@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/download.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/meme_6.gif")]
 
 

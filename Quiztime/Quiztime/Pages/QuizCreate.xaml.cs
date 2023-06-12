@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAnimatedGif;
 
 namespace Quiztime.Pages
 {
@@ -22,6 +25,23 @@ namespace Quiztime.Pages
         public QuizCreate()
         {
             InitializeComponent();
+            Console.WriteLine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName);
+        }
+
+        private void ImagePicker(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "Image files|*.bmp;*.jpg;*.jepg;*.gif;*.png";
+            file.FilterIndex = 1;
+            if (file.ShowDialog() == true)
+            {
+                File.Copy(file.FileName, System.IO.Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", System.IO.Path.GetFileName(file.FileName)), true);
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri(System.IO.Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", System.IO.Path.GetFileName(file.FileName)));
+                image.EndInit();
+                ImageBehavior.SetAnimatedSource(testimage, image);
+            }
         }
     }
 }
