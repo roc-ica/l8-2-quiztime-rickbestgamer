@@ -54,3 +54,5 @@ C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\obj\Deb
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\WpfAnimatedGif.dll
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\WpfAnimatedGif.pdb
 C:\school\level 7\QuizTime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\WpfAnimatedGif.xml
+C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\school\Level 7\Quiztime\l8-2-quiztime-rickbestgamer\Quiztime\Quiztime\bin\Debug\Microsoft.Expression.Drawing.xml

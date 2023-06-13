@@ -40,7 +40,24 @@ namespace Quiztime.Pages
                 image.BeginInit();
                 image.UriSource = new Uri(System.IO.Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", System.IO.Path.GetFileName(file.FileName)));
                 image.EndInit();
-                ImageBehavior.SetAnimatedSource(testimage, image);
+            }
+        }
+
+        private void PlaceholderRemove(object sender, RoutedEventArgs e)
+        {
+            if (QuizTitleTxb.Text == "Enter quiz title here")
+            {
+                QuizTitleTxb.Text = "";
+                QuizTitleTxb.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000"));
+            }
+        }
+
+        private void PlaceholderReturn(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(QuizTitleTxb.Text))
+            {
+                QuizTitleTxb.Text = "Enter quiz title here";
+                QuizTitleTxb.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF808080"));
             }
         }
     }

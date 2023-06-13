@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quiztime.Pages"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
-        Title="QuizPlay" Height="450" Width="800" Style="{DynamicResource MainWindow}">
+        Title="QuizPlay" Height="450" Width="800" Style="{DynamicResource MainWindow}"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -49,11 +51,13 @@
             </Viewbox>
         </Border>
         <Grid Name="Timer" Grid.Column="4" Grid.Row="4">
-            <TextBlock Text="10" Foreground="#FFFF74EA" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Path Data="M25,0 A25,25 90 0 1 25,50" Fill="Orange"/>
+
+            <TextBlock x:Name="TimerText" Text="10" Foreground="#FFFF74EA" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ed:Arc x:Name="TimerProgressbar" Fill="#7F8EFFFF" Width="40" Height="40" ArcThickness="5" ArcThicknessUnit="Pixel" Stretch="None" EndAngle="360"/>
+            <!--<Path Data="M25,0 A25,25 90 0 1 25,50" Fill="Orange"/>
             <Path Data="M50,25 A25,25 90 0 1 25,50" Fill="Red"/>
             <Path Data="M25,50 A25,25 90 0 1 0,25" Fill="Blue"/>
-            <Path Data="M0,25 A25,25 90 0 1 25,0" Fill="Green"/>
+            <Path Data="M0,25 A25,25 90 0 1 25,0" Fill="Green"/>-->
         </Grid>
         <Border Grid.Row="8" Grid.RowSpan="3" Grid.ColumnSpan="10">
             <Border.Background>

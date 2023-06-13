@@ -33,6 +33,33 @@ namespace Quiztime.Pages
                     }
                 }
             }
+
+            StartTimer();
+            StartCounter();
+
+        }
+
+        readonly int TimeDelay = 10;
+
+        private async void StartTimer()
+        {
+            while (TimerProgressbar.EndAngle > 0)
+            {
+                await Task.Delay(1000);
+                TimerProgressbar.EndAngle -= 360/TimeDelay;
+            }
+
+        }
+
+        private async void StartCounter()
+        {
+            int DelayText = TimeDelay;
+            while (TimerText.Text != "0")
+            {
+                await Task.Delay(1000);
+                DelayText--;
+                TimerText.Text = "" + DelayText;
+            }
         }
     }
 }
