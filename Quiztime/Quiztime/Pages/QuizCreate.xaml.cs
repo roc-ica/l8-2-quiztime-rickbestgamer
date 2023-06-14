@@ -56,7 +56,6 @@ namespace Quiztime.Pages
             FCall.NewQuestion();
             QuizGrid.ItemsSource = null;
             QuizGrid.ItemsSource = mydata.NewQuizQuestion;
-            ControlCollection test
         }
 
         private void AddPicture(object sender, RoutedEventArgs e)
@@ -70,6 +69,11 @@ namespace Quiztime.Pages
                 mydata.NewQuizQuestion[(int)((Button)sender).Tag - 1].Picture = System.IO.Path.GetFileName(file.FileName);
                 ((Button)sender).Content = System.IO.Path.GetFileName(file.FileName);
             }
+        }
+
+        private void SetCorrectAnswer(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void SaveQuiz(object sender, RoutedEventArgs e)
