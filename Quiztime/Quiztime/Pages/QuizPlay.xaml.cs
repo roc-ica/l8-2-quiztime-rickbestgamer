@@ -45,15 +45,29 @@ namespace Quiztime.Pages
         {
             while (TimerProgressbar.EndAngle > 0)
             {
+                MovePRSB();
                 await Task.Delay(1000);
-                TimerProgressbar.EndAngle -= 360/TimeDelay;
+
             }
 
+        }
+
+        private async void MovePRSB()
+        {
+            for (int i = 0; i < 360 / TimeDelay; i++)
+            {
+                if (TimerProgressbar.EndAngle > 0)
+                {
+                    TimerProgressbar.EndAngle--;
+                    await Task.Delay(1);
+                }
+            }
         }
 
         private async void StartCounter()
         {
             int DelayText = TimeDelay;
+            TimerText.Text = "" + DelayText;
             while (TimerText.Text != "0")
             {
                 await Task.Delay(1000);

@@ -28,8 +28,6 @@ namespace Quiztime
             mydata md = new mydata();
             md.Test();
             QuizGrid.ItemsSource = mydata.Quiz;
-            Console.WriteLine("list;");
-            Console.WriteLine(mydata.Quiz.ToString());
 
 
         }
