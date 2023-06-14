@@ -15,25 +15,18 @@ namespace Quiztime.Classes
         public string Picture { get; set; }
         public DateTime Updated { get; set; }
     }
-    public class Box
+
+    public class NewQuizQuestions
     {
-        public Box() { }
+        public NewQuizQuestions() { }
 
-        public int BoxId { get; set; }
-        public string BoxName { get; set; }
-
-        public virtual Item Item { get; set; }
-    }
-
-    public class Item
-    {
-        public Item()
-        {
-            Boxes = new List<Box>();
-        }
-        public int ItemId { get; set; }
-        public string Description { get; set; }
-
-        public virtual ICollection<Box> Boxes { get; set; }
+        public Int32 Id { get; set; }
+        public string Question { get; set; }
+        public string Picture { get; set; }
+        public string Answer1 { get; set; }
+        public string Answer2 { get; set; }
+        public string Answer3 { get; set; }
+        public string Answer4 { get; set; }
+        public Int32 CAnswer { get; set; }
     }
 }

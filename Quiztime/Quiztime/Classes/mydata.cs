@@ -13,12 +13,13 @@ namespace Quiztime.Classes
     public class mydata
     {
         public static List<cQuiz> Quiz = new List<cQuiz>();
+        public static List<NewQuizQuestions> NewQuizQuestion = new List<NewQuizQuestions>();
         public static Int32 SelectedQuiz;
         private MySqlConnection Conn;
         public mydata()
         {
-            string myConnectionString = "server=localhost;uid=quiztimeuser;" +
-                "pwd=quiztime;database=quiztime";
+            string myConnectionString = "server=localhost;uid=root;" +
+                "pwd=;database=quiztimedb";
 
             try
             {
@@ -42,11 +43,17 @@ namespace Quiztime.Classes
             while (reader.Read())
             {
                 Quiz.Add(new cQuiz());
-                Quiz[Quiz.Count - 1].Id = (Int32)reader["id"];
-                Quiz[Quiz.Count - 1].Name = (string)reader["name"];
-                Quiz[Quiz.Count - 1].Picture = (string)reader["picture"];
-                Quiz[Quiz.Count - 1].Updated = (DateTime)reader["updated"];
+                Quiz[Quiz.Count - 1].Id = (Int32)reader["idQuiz"];
+                Quiz[Quiz.Count - 1].Name = (string)reader["QuizName"];
+                Quiz[Quiz.Count - 1].Picture = (string)reader["Picture"];
+                Quiz[Quiz.Count - 1].Updated = (DateTime)reader["Updated"];
             }
+        }
+
+        public void NewQuestion()
+        {
+            NewQuizQuestion.Add(new NewQuizQuestions());
+            NewQuizQuestion[NewQuizQuestion.Count - 1].Id = NewQuizQuestion.Count;
         }
     }
 }
