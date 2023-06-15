@@ -45,8 +45,8 @@ namespace Quiztime.Pages
         {
             while (TimerProgressbar.EndAngle > 0)
             {
-                MovePRSB();
                 await Task.Delay(1000);
+                MovePRSB();
 
             }
 

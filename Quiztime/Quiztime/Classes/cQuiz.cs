@@ -20,13 +20,13 @@ namespace Quiztime.Classes
     {
         public NewQuizQuestions() { }
 
-        public Int32 Id { get; set; }
+        public int Id { get; set; }
         public string Question { get; set; }
         public string Picture { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
         public string Answer3 { get; set; }
         public string Answer4 { get; set; }
-        public Int32 CAnswer { get; set; }
+        public int CAnswer { get; set; }
     }
 }

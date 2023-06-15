@@ -71,14 +71,36 @@ namespace Quiztime.Pages
             }
         }
 
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj == null) yield return (T)Enumerable.Empty<T>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
+                if (ithChild == null) continue;
+                if (ithChild is T t) yield return t;
+                foreach (T childOfChild in FindVisualChildren<T>(ithChild)) yield return childOfChild;
+            }
+        }
+
         private void SetCorrectAnswer(object sender, RoutedEventArgs e)
         {
-
+            foreach (RadioButton tb in FindVisualChildren<RadioButton>(this))
+            {
+                Console.WriteLine("tb");
+                Console.WriteLine(tb.Tag);
+                Console.WriteLine(tb.GroupName);
+                Console.WriteLine(tb.IsChecked);
+            }
+            mydata.NewQuizQuestion[int.Parse(((RadioButton)sender).GroupName) - 1].CAnswer = int.Parse((string)((RadioButton)sender).Tag);
         }
 
         private void SaveQuiz(object sender, RoutedEventArgs e)
         {
-
+            foreach (var item in mydata.NewQuizQuestion)
+            {
+            }
         }
 
         //private void AddPicture(object sender, MouseButtonEventArgs e)
