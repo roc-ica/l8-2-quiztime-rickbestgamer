@@ -50,12 +50,27 @@ namespace Quiztime.Pages
             }
         }
 
-        private void AddQuestion(object sender, RoutedEventArgs e)
+        private async void AddQuestion(object sender, RoutedEventArgs e)
         {
             mydata FCall = new mydata();
             FCall.NewQuestion();
             QuizGrid.ItemsSource = null;
             QuizGrid.ItemsSource = mydata.NewQuizQuestion;
+            await Task.Delay(1);
+            foreach (RadioButton tb in FindVisualChildren<RadioButton>(this))
+            {
+                if (int.Parse((string)tb.Tag) == mydata.NewQuizQuestion[int.Parse(tb.GroupName)-1].CAnswer)
+                {
+                    tb.IsChecked = true;
+                }
+            }
+            foreach (Button tb in FindVisualChildren<Button>(this))
+            {
+                if (!string.IsNullOrEmpty(mydata.NewQuizQuestion[int.Parse((string)tb.Tag)-1].Picture))
+                {
+                    tb.Content = mydata.NewQuizQuestion[int.Parse((string)tb.Tag) - 1].Picture;
+                }
+            }
         }
 
         private void AddPicture(object sender, RoutedEventArgs e)
@@ -86,13 +101,6 @@ namespace Quiztime.Pages
 
         private void SetCorrectAnswer(object sender, RoutedEventArgs e)
         {
-            foreach (RadioButton tb in FindVisualChildren<RadioButton>(this))
-            {
-                Console.WriteLine("tb");
-                Console.WriteLine(tb.Tag);
-                Console.WriteLine(tb.GroupName);
-                Console.WriteLine(tb.IsChecked);
-            }
             mydata.NewQuizQuestion[int.Parse(((RadioButton)sender).GroupName) - 1].CAnswer = int.Parse((string)((RadioButton)sender).Tag);
         }
 

@@ -45,6 +45,18 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Question" Binding="{Binding Question}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Amount">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedIndex="3">
+                                <ComboBoxItem Content="1"></ComboBoxItem>
+                                <ComboBoxItem Content="2"></ComboBoxItem>
+                                <ComboBoxItem Content="3"></ComboBoxItem>
+                                <ComboBoxItem Content="4"></ComboBoxItem>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Answer 1" Binding="{Binding Answer1}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Correct">
                     <DataGridTemplateColumn.CellTemplate>
