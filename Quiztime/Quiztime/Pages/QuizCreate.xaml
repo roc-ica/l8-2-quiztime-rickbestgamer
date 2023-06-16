@@ -33,22 +33,21 @@
             <TextBox x:Name="QuizTitleTxb" Margin="0,5,0,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" GotFocus="PlaceholderRemove" LostFocus="PlaceholderReturn" Text="Enter quiz title here" Foreground="Gray" ></TextBox>
 
         </Viewbox>
-        <DataGrid x:Name="QuizGrid" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}" CanUserSortColumns="False">
+        <DataGrid x:Name="QuizGrid" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}" CanUserSortColumns="False" ScrollViewer.CanContentScroll="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Picture">
+                <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <Button Content="Add picture" Click="AddPicture" Tag="{Binding Id}"/>
-                            </StackPanel>
+                            <Button Content="Add picture" Click="AddPicture" Tag="{Binding Id}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Picture Name" Binding="{Binding Picture}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Question" Binding="{Binding Question}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Amount">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedIndex="3">
+                            <ComboBox SelectedIndex="3" Tag="{Binding Id}">
                                 <ComboBoxItem Content="1"></ComboBoxItem>
                                 <ComboBoxItem Content="2"></ComboBoxItem>
                                 <ComboBoxItem Content="3"></ComboBoxItem>
@@ -57,7 +56,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Answer 1" Binding="{Binding Answer1}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Answer 1">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Tag="{Binding Id}" Text="{Binding Answer1}" TextChanged="TextChangedA1"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Correct">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -65,7 +70,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Answer 2" Binding="{Binding Answer2}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Answer 2">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Tag="{Binding Id}" Text="{Binding Answer2}" TextChanged="TextChangedA2"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Correct">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -73,7 +84,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Answer 3" Binding="{Binding Answer3}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Answer 3">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Tag="{Binding Id}" Text="{Binding Answer3}" TextChanged="TextChangedA3"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Correct">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -81,7 +98,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Answer 4" Binding="{Binding Answer4}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Answer 4">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Tag="{Binding Id}" Text="{Binding Answer4}" TextChanged="TextChangedA4"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Correct">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -89,7 +112,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Tag="{Binding Id}" Content="{Binding Id}" Click="RemoveQuestion"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="1" Grid.Row="8" Content="Add Question" Click="AddQuestion" Style="{DynamicResource Button}"></Button>

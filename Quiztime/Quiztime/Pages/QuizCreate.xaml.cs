@@ -59,16 +59,9 @@ namespace Quiztime.Pages
             await Task.Delay(1);
             foreach (RadioButton tb in FindVisualChildren<RadioButton>(this))
             {
-                if (int.Parse((string)tb.Tag) == mydata.NewQuizQuestion[int.Parse(tb.GroupName)-1].CAnswer)
+                if (int.Parse((string)tb.Tag) == mydata.NewQuizQuestion[int.Parse(tb.GroupName) - 1].CAnswer)
                 {
                     tb.IsChecked = true;
-                }
-            }
-            foreach (Button tb in FindVisualChildren<Button>(this))
-            {
-                if (!string.IsNullOrEmpty(mydata.NewQuizQuestion[int.Parse((string)tb.Tag)-1].Picture))
-                {
-                    tb.Content = mydata.NewQuizQuestion[int.Parse((string)tb.Tag) - 1].Picture;
                 }
             }
         }
@@ -82,7 +75,8 @@ namespace Quiztime.Pages
             {
                 File.Copy(file.FileName, System.IO.Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", System.IO.Path.GetFileName(file.FileName)), true);
                 mydata.NewQuizQuestion[(int)((Button)sender).Tag - 1].Picture = System.IO.Path.GetFileName(file.FileName);
-                ((Button)sender).Content = System.IO.Path.GetFileName(file.FileName);
+                QuizGrid.ItemsSource = null;
+                QuizGrid.ItemsSource = mydata.NewQuizQuestion;
             }
         }
 
@@ -109,6 +103,41 @@ namespace Quiztime.Pages
             foreach (var item in mydata.NewQuizQuestion)
             {
             }
+        }
+
+        private void TextChangedA1(object sender, TextChangedEventArgs e)
+        {
+            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer1 = ((TextBox)sender).Text;
+        }
+
+        private void TextChangedA2(object sender, TextChangedEventArgs e)
+        {
+            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer2 = ((TextBox)sender).Text;
+        }
+
+        private void TextChangedA3(object sender, TextChangedEventArgs e)
+        {
+            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer3 = ((TextBox)sender).Text;
+        }
+
+        private void TextChangedA4(object sender, TextChangedEventArgs e)
+        {
+            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer4 = ((TextBox)sender).Text;
+        }
+
+        private void RemoveQuestion(object sender, RoutedEventArgs e)
+        {
+            mydata.NewQuizQuestion.Remove(mydata.NewQuizQuestion[Convert.ToInt32(((Button)sender).Tag) - 1]);
+            if (mydata.NewQuizQuestion.Count >= Convert.ToInt32(((Button)sender).Tag) - 1)
+            {
+                for (int i = 0; i < mydata.NewQuizQuestion.Count - Convert.ToInt32(((Button)sender).Tag); i++)
+                {
+                    Console.WriteLine(Convert.ToInt32(((Button)sender).Tag) + i);
+                    mydata.NewQuizQuestion[Convert.ToInt32(((Button)sender).Tag) + i].Id = Convert.ToInt32(((Button)sender).Tag) + i;
+                }
+            }
+            QuizGrid.ItemsSource = null;
+            QuizGrid.ItemsSource = mydata.NewQuizQuestion;
         }
 
         //private void AddPicture(object sender, MouseButtonEventArgs e)
