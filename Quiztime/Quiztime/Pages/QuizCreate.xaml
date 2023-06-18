@@ -59,7 +59,7 @@
                 <DataGridTemplateColumn Header="Answer 1">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Tag="{Binding Id}" Text="{Binding Answer1}" TextChanged="TextChangedA1"></TextBox>
+                            <TextBox x:Name="_1" Tag="{Binding Id}" Text="{Binding Answer1}" TextChanged="TextChanged"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -73,7 +73,7 @@
                 <DataGridTemplateColumn Header="Answer 2">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Tag="{Binding Id}" Text="{Binding Answer2}" TextChanged="TextChangedA2"></TextBox>
+                            <TextBox x:Name="_2" Tag="{Binding Id}" Text="{Binding Answer2}" TextChanged="TextChanged"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -87,7 +87,7 @@
                 <DataGridTemplateColumn Header="Answer 3">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Tag="{Binding Id}" Text="{Binding Answer3}" TextChanged="TextChangedA3"></TextBox>
+                            <TextBox x:Name="_3" Tag="{Binding Id}" Text="{Binding Answer3}" TextChanged="TextChanged"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -101,7 +101,7 @@
                 <DataGridTemplateColumn Header="Answer 4">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Tag="{Binding Id}" Text="{Binding Answer4}" TextChanged="TextChangedA4"></TextBox>
+                            <TextBox x:Name="_4" Tag="{Binding Id}" Text="{Binding Answer4}" TextChanged="TextChanged"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

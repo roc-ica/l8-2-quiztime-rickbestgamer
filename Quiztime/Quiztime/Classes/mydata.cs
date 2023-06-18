@@ -50,6 +50,14 @@ namespace Quiztime.Classes
             }
         }
 
+        public void SaveQuiz()
+        {
+            string sql = @"insert from quiz";
+            MySqlCommand cmd = new MySqlCommand(sql, Conn);
+            cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = "";
+            cmd.Parameters.Add("@picture", MySqlDbType.VarChar).Value = "";
+        }
+
         public void NewQuestion()
         {
             NewQuizQuestion.Add(new NewQuizQuestions());

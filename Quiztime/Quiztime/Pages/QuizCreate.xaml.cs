@@ -105,35 +105,34 @@ namespace Quiztime.Pages
             }
         }
 
-        private void TextChangedA1(object sender, TextChangedEventArgs e)
+        private void TextChanged(object sender, TextChangedEventArgs e)
         {
-            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer1 = ((TextBox)sender).Text;
-        }
-
-        private void TextChangedA2(object sender, TextChangedEventArgs e)
-        {
-            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer2 = ((TextBox)sender).Text;
-        }
-
-        private void TextChangedA3(object sender, TextChangedEventArgs e)
-        {
-            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer3 = ((TextBox)sender).Text;
-        }
-
-        private void TextChangedA4(object sender, TextChangedEventArgs e)
-        {
-            mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer4 = ((TextBox)sender).Text;
+            if (((TextBox)sender).Name == "_1")
+            {
+                mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer1 = ((TextBox)sender).Text;
+            }
+            else if (((TextBox)sender).Name == "_2")
+            {
+                mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer2 = ((TextBox)sender).Text;
+            }
+            else if (((TextBox)sender).Name == "_3")
+            {
+                mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer3 = ((TextBox)sender).Text;
+            }
+            else if (((TextBox)sender).Name == "_4")
+            {
+                mydata.NewQuizQuestion[Convert.ToInt32(((TextBox)sender).Tag) - 1].Answer4 = ((TextBox)sender).Text;
+            }
         }
 
         private void RemoveQuestion(object sender, RoutedEventArgs e)
         {
             mydata.NewQuizQuestion.Remove(mydata.NewQuizQuestion[Convert.ToInt32(((Button)sender).Tag) - 1]);
-            if (mydata.NewQuizQuestion.Count >= Convert.ToInt32(((Button)sender).Tag) - 1)
+            if (mydata.NewQuizQuestion.Count >= Convert.ToInt32(((Button)sender).Tag))
             {
-                for (int i = 0; i < mydata.NewQuizQuestion.Count - Convert.ToInt32(((Button)sender).Tag); i++)
+                for (int i = 0; i < mydata.NewQuizQuestion.Count - (Convert.ToInt32(((Button)sender).Tag) - 1); i++)
                 {
-                    Console.WriteLine(Convert.ToInt32(((Button)sender).Tag) + i);
-                    mydata.NewQuizQuestion[Convert.ToInt32(((Button)sender).Tag) + i].Id = Convert.ToInt32(((Button)sender).Tag) + i;
+                    mydata.NewQuizQuestion[Convert.ToInt32(((Button)sender).Tag) - 1 + i].Id = Convert.ToInt32(((Button)sender).Tag) + i;
                 }
             }
             QuizGrid.ItemsSource = null;
