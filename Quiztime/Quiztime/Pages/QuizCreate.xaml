@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quiztime.Pages"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="QuizCreate" Height="450" Width="800" Style="{StaticResource MainWindow}">
+        Title="QuizCreate" Height="450" Width="800" Style="{StaticResource MainWindow}" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -28,9 +29,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ItemsControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Style="{DynamicResource MainGrid}"></ItemsControl>
+        <Button x:Name="CoverPic" Grid.Column="2" Content="Add cover picture" Click="AddCoverPicture"/>
         <Viewbox Grid.Column="2" Grid.Row="1">
 
-            <TextBox x:Name="QuizTitleTxb" Margin="0,5,0,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" GotFocus="PlaceholderRemove" LostFocus="PlaceholderReturn" Text="Enter quiz title here" Foreground="Gray" ></TextBox>
+            <TextBox x:Name="QuizTitleTxb" Margin="0,5,0,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" GotFocus="PlaceholderRemove" LostFocus="PlaceholderReturn" Foreground="Gray" TextChanged="QuizTitleTxb_TextChanged" ></TextBox>
 
         </Viewbox>
         <DataGrid x:Name="QuizGrid" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}" CanUserSortColumns="False" ScrollViewer.CanContentScroll="True">
@@ -43,16 +45,17 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Picture Name" Binding="{Binding Picture}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Question" Binding="{Binding Question}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Question">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox x:Name="Name" Tag="{Binding Id}" Text="{Binding Question}" TextChanged="TextChanged"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Amount">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedIndex="3" Tag="{Binding Id}">
-                                <ComboBoxItem Content="1"></ComboBoxItem>
-                                <ComboBoxItem Content="2"></ComboBoxItem>
-                                <ComboBoxItem Content="3"></ComboBoxItem>
-                                <ComboBoxItem Content="4"></ComboBoxItem>
-                            </ComboBox>
+                            <xctk:IntegerUpDown Minimum="0" Maximum="4" Value="{Binding Amount}" Tag="{Binding Id}" ValueChanged="AmountChanged"></xctk:IntegerUpDown>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -109,6 +112,13 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <RadioButton Tag="4" GroupName="{Binding Id}" Checked="SetCorrectAnswer"></RadioButton>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Timer (sec)">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <xctk:IntegerUpDown Minimum="0" Value="{Binding Timer}" Tag="{Binding Id}" ValueChanged="IntegerUpDown_ValueChanged"></xctk:IntegerUpDown>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

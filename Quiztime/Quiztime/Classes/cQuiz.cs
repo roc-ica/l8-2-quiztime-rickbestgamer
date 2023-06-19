@@ -23,10 +23,12 @@ namespace Quiztime.Classes
         public int Id { get; set; }
         public string Question { get; set; }
         public string Picture { get; set; }
+        public int Amount { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
         public string Answer3 { get; set; }
         public string Answer4 { get; set; }
         public int CAnswer { get; set; }
+        public int Timer { get; set; }
     }
 }
