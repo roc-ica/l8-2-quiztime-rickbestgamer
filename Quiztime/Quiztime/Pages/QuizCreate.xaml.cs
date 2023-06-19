@@ -131,13 +131,29 @@ namespace Quiztime.Pages
 
         private void SaveQuiz(object sender, RoutedEventArgs e)
         {
-            if (true)
+            mydata fc = new mydata();
+            if (mydata.QuizMode == 0)
             {
-
+                if (fc.QuizNameExcist())
+                {
+                    fc.SaveQuiz();
+                    this.Close();
+                }
+                else
+                {
+                    Label txbl = new Label();
+                    txbl.Content = "This name already excists";
+                    txbl.Foreground = Brushes.Red;
+                    txbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    txbl.VerticalAlignment = VerticalAlignment.Stretch;
+                    txbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    txbl.VerticalContentAlignment = VerticalAlignment.Center;
+                    txbl.BorderBrush = Brushes.Red;
+                    txbl.BorderThickness = new Thickness(1);
+                    txbl.Margin = new Thickness(5);
+                    NameError.Child = txbl;
+                }
             }
-            mydata cf = new mydata();
-            cf.SaveQuiz();
-            this.Close();
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)

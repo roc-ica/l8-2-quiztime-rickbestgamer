@@ -34,6 +34,7 @@ namespace Quiztime
 
          private void OpenQuiz(object sender, RoutedEventArgs e)
         {
+            mydata.QuizMode = 3;
             mydata.SelectedQuiz = (int)((Button)sender).Tag;
             Window QuizPlay = new QuizPlay();
             QuizPlay.Show();
@@ -41,6 +42,7 @@ namespace Quiztime
 
         private void CheckQuiz(object sender, RoutedEventArgs e)
         {
+            mydata.QuizMode = 2;
             mydata.SelectedQuiz = (int)((Button)sender).Tag;
             Window QuizPlay = new QuizPlay();
             QuizPlay.Show();
@@ -48,6 +50,7 @@ namespace Quiztime
 
         private void EditQuiz(object sender, RoutedEventArgs e)
         {
+            mydata.QuizMode = 1;
             mydata.SelectedQuiz = (int)((Button)sender).Tag;
             Window QuizPlay = new QuizPlay();
             QuizPlay.Show();
@@ -55,6 +58,7 @@ namespace Quiztime
 
         private void OpenAddQuiz(object sender, RoutedEventArgs e)
         {
+            mydata.QuizMode = 0;
             Window AddQuiz = new QuizCreate();
             AddQuiz.Show();
         }

@@ -17,6 +17,7 @@ namespace Quiztime.Classes
         public static List<cQuiz> Quiz = new List<cQuiz>();
         public static List<NewQuizQuestions> NewQuizQuestion = new List<NewQuizQuestions>();
         public static Int32 SelectedQuiz;
+        public static Int32 QuizMode;
         private MySqlConnection Conn;
         public mydata()
         {
@@ -91,6 +92,24 @@ namespace Quiztime.Classes
         {
             NewQuizQuestion.Add(new NewQuizQuestions());
             NewQuizQuestion[NewQuizQuestion.Count - 1].Id = NewQuizQuestion.Count;
+        }
+
+        public bool QuizNameExcist()
+        {
+            string SQLQ = @"SELECT * FROM `quiz` WHERE `QuizName` = @QuizName";
+            MySqlCommand cmd = new MySqlCommand(@SQLQ, Conn);
+            cmd.Parameters.Add("@QuizName", MySqlDbType.VarChar).Value = NewQuizName;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return false;
+            }
+            else
+            {
+                reader.Close();
+                return true;
+            }
         }
     }
 }
