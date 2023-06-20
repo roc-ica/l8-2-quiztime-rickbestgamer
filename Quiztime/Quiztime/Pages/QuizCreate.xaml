@@ -38,14 +38,14 @@
         </Viewbox>
         <DataGrid x:Name="QuizGrid" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}" CanUserSortColumns="False" ScrollViewer.CanContentScroll="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="">
+                <DataGridTemplateColumn CanUserResize="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Add picture" Click="AddPicture" Tag="{Binding Id}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Picture Name" Binding="{Binding Picture}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Picture Name" Binding="{Binding Picture}" MinWidth="{Binding Path=ActualWidth, ElementName=projectInfoHeader }"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Question">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -56,7 +56,7 @@
                 <DataGridTemplateColumn Header="Amount">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <xctk:IntegerUpDown Minimum="0" Maximum="4" Value="{Binding Amount}" Tag="{Binding Id}" ValueChanged="AmountChanged"></xctk:IntegerUpDown>
+                            <xctk:IntegerUpDown Minimum="2" Maximum="4" Value="{Binding Amount}" Tag="{Binding Id}" ValueChanged="AmountChanged"></xctk:IntegerUpDown>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -133,6 +133,18 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Viewbox x:Name="CorrectError" Grid.Row="5" Grid.Column="9">
+
+        </Viewbox>
+        <Viewbox x:Name="AnswerError" Grid.Row="4" Grid.Column="9">
+
+        </Viewbox>
+        <Viewbox x:Name="QuestionError" Grid.Row="3" Grid.Column="9">
+
+        </Viewbox>
+        <Viewbox x:Name="NoRowError" Grid.Row="9" Grid.Column="1">
+
+        </Viewbox>
         <Button Grid.Column="1" Grid.Row="8" Content="Add Question" Click="AddQuestion" Style="{DynamicResource Button}"></Button>
         <Button Grid.Column="3" Grid.Row="8" Content="Save Quiz" Style="{DynamicResource Button}" Click="SaveQuiz"></Button>
 

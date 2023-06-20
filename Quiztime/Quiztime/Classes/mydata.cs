@@ -53,22 +53,30 @@ namespace Quiztime.Classes
             }
         }
 
-        public void SaveQuiz()
+        public void SaveNewQuiz()
         {
             string sql = @"INSERT INTO `quiz`(`QuizName`, `Picture`) VALUES (@Name, @Picture);";
             MySqlCommand cmd = new MySqlCommand(sql, Conn);
             cmd.Parameters.Add("@Name", MySqlDbType.VarChar).Value = NewQuizName;
-            cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = CoverPicture;
+            if (CoverPicture == null)
+            {
+                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = "";
+            }
+            else
+            {
+                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = CoverPicture;
+            }
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.ExecuteNonQuery();
             string sql2 = @"SELECT IdQuiz from quiz WHERE QuizName = @Name";
             MySqlCommand cmd2 = new MySqlCommand(sql2, Conn);
             cmd2.Parameters.Add("@Name", MySqlDbType.VarChar).Value = NewQuizName;
             MySqlDataReader Reader = cmd2.ExecuteReader();
-            int sqlid = 0;
+            int SQLQuizId = 0;
+            int SQLQuestionId = 0;
             while (Reader.Read())
             {
-                sqlid = (int)Reader["IdQuiz"];
+                SQLQuizId = (int)Reader["IdQuiz"];
             }
             Reader.Close();
 
@@ -76,12 +84,99 @@ namespace Quiztime.Classes
             {
                 string sql3 = @"INSERT INTO `questions`(`Question`, `Picture`, `Timer`, `Quiz_IdQuiz`) VALUES (@Name, @Picture, @Timer, @Id);";
                 MySqlCommand cmd3 = new MySqlCommand(sql3, Conn);
-                cmd3.Parameters.Add("@Name", MySqlDbType.VarChar).Value = item.Question;
+                if (item.Picture == null)
+                {
+                    cmd3.Parameters.Add("@Name", MySqlDbType.VarChar).Value = "";
+                }
+                else
+                {
+                    cmd3.Parameters.Add("@Name", MySqlDbType.VarChar).Value = item.Question;
+                }
                 cmd3.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = item.Picture;
                 cmd3.Parameters.Add("@Timer", MySqlDbType.VarChar).Value = item.Timer;
-                cmd3.Parameters.Add("@Id", MySqlDbType.VarChar).Value = sqlid;
+                cmd3.Parameters.Add("@Id", MySqlDbType.VarChar).Value = SQLQuizId;
                 cmd3.CommandType = System.Data.CommandType.Text;
                 cmd3.ExecuteNonQuery();
+
+                string sql4 = @"SELECT `IdQuestions` FROM `questions` WHERE `question` = @Question AND `Quiz_IdQuiz` = @QuizId";
+                MySqlCommand cmd4 = new MySqlCommand(sql4, Conn);
+                cmd4.Parameters.Add("@Question", MySqlDbType.VarChar).Value = item.Question;
+                cmd4.Parameters.Add("@QuizId", MySqlDbType.VarChar).Value = SQLQuizId;
+                MySqlDataReader Reader2 = cmd4.ExecuteReader();
+                while (Reader2.Read())
+                {
+                    SQLQuizId = (int)Reader2["IdQuestions"];
+                }
+                string sql5 = @"INSERT INTO `answers`(`Answer`, `Correct`, `Questions_IdQuestions`, `Questions_Quiz_IdQuiz`) VALUES (@Answer, @Correct, @QuestionId, @QuizId)";
+                MySqlCommand cmd5 = new MySqlCommand(sql5, Conn);
+                if (item.Amount >= 1)
+                {
+                    cmd5.Parameters.Add("@Answer", MySqlDbType.VarChar).Value = item.Answer1;
+                    if (item.CAnswer == 1)
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 1;
+                    }
+                    else
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 0;
+                    }
+                    cmd5.Parameters.Add("@QuestionId", MySqlDbType.VarChar).Value = SQLQuestionId;
+                    cmd5.Parameters.Add("@QuizId", MySqlDbType.VarChar).Value = SQLQuizId;
+                    cmd5.CommandType = System.Data.CommandType.Text;
+                    cmd5.ExecuteNonQuery();
+                    cmd5.Parameters.Clear();
+                }
+                if (item.Amount >= 2)
+                {
+                    cmd5.Parameters.Add("@Answer", MySqlDbType.VarChar).Value = item.Answer2;
+                    if (item.CAnswer == 2)
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 1;
+                    }
+                    else
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 0;
+                    }
+                    cmd5.Parameters.Add("@QuestionId", MySqlDbType.VarChar).Value = SQLQuestionId;
+                    cmd5.Parameters.Add("@QuizId", MySqlDbType.VarChar).Value = SQLQuizId;
+                    cmd5.CommandType = System.Data.CommandType.Text;
+                    cmd5.ExecuteNonQuery();
+                    cmd5.Parameters.Clear();
+                }
+                if (item.Amount >= 3)
+                {
+                    cmd5.Parameters.Add("@Answer", MySqlDbType.VarChar).Value = item.Answer3;
+                    if (item.CAnswer == 3)
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 1;
+                    }
+                    else
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 0;
+                    }
+                    cmd5.Parameters.Add("@QuestionId", MySqlDbType.VarChar).Value = SQLQuestionId;
+                    cmd5.Parameters.Add("@QuizId", MySqlDbType.VarChar).Value = SQLQuizId;
+                    cmd5.CommandType = System.Data.CommandType.Text;
+                    cmd5.ExecuteNonQuery();
+                    cmd5.Parameters.Clear();
+                }
+                if (item.Amount >= 4)
+                {
+                    cmd5.Parameters.Add("@Answer", MySqlDbType.VarChar).Value = item.Answer4;
+                    if (item.CAnswer == 4)
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 1;
+                    }
+                    else
+                    {
+                        cmd5.Parameters.Add("@Correct", MySqlDbType.VarChar).Value = 0;
+                    }
+                    cmd5.Parameters.Add("@QuestionId", MySqlDbType.VarChar).Value = SQLQuestionId;
+                    cmd5.Parameters.Add("@QuizId", MySqlDbType.VarChar).Value = SQLQuizId;
+                    cmd5.CommandType = System.Data.CommandType.Text;
+                    cmd5.ExecuteNonQuery();
+                    cmd5.Parameters.Clear();
+                }
             }
             NewQuizName = null;
             CoverPicture = null;

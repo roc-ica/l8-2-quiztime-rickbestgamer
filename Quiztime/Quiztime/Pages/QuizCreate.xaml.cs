@@ -85,6 +85,7 @@ namespace Quiztime.Pages
             mydata.NewQuizQuestion.Add(new NewQuizQuestions());
             mydata.NewQuizQuestion[mydata.NewQuizQuestion.Count - 1].Id = mydata.NewQuizQuestion.Count;
             mydata.NewQuizQuestion[mydata.NewQuizQuestion.Count - 1].Amount = 4;
+            mydata.NewQuizQuestion[mydata.NewQuizQuestion.Count - 1].Picture = "";
             QuizGrid.ItemsSource = null;
             QuizGrid.ItemsSource = mydata.NewQuizQuestion;
             await Task.Delay(1);
@@ -134,24 +135,146 @@ namespace Quiztime.Pages
             mydata fc = new mydata();
             if (mydata.QuizMode == 0)
             {
-                if (fc.QuizNameExcist())
+                CorrectError.Child = null;
+                NoRowError.Child = null;
+                NameError.Child = null;
+                QuestionError.Child = null;
+
+                if (fc.QuizNameExcist() && mydata.NewQuizName != "Enter quiz title here")
                 {
-                    fc.SaveQuiz();
-                    this.Close();
+                    if (mydata.NewQuizQuestion.Count > 0)
+                    {
+                        int QuestionNotEnterd = 0;
+                        int AnswerNotEnterd = 0;
+                        foreach (var item in mydata.NewQuizQuestion)
+                        {
+                            if (item.Question == null)
+                            {
+                                QuestionNotEnterd++;
+                            }
+                            if (item.Answer1 == null)
+                            {
+                                AnswerNotEnterd++;
+                            }
+                            if (item.Answer2 == null)
+                            {
+                                AnswerNotEnterd++;
+                            }
+                            if (item.Answer3 == null)
+                            {
+                                AnswerNotEnterd++;
+                            }
+                            if (item.Answer4 == null)
+                            {
+                                AnswerNotEnterd++;
+                            }
+                            AnswerNotEnterd = AnswerNotEnterd + mydata.NewQuizQuestion[item.Id - 1].Amount - 4;
+                        }
+                        if (QuestionNotEnterd != 0)
+                        {
+                            Label lbl = new Label();
+                            lbl.Content = "You have " + QuestionNotEnterd + " questions without the question specified";
+                            lbl.Foreground = Brushes.Red;
+                            lbl.BorderBrush = Brushes.Red;
+                            lbl.BorderThickness = new Thickness(1);
+                            lbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                            lbl.VerticalAlignment = VerticalAlignment.Stretch;
+                            lbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                            lbl.VerticalContentAlignment = VerticalAlignment.Center;
+                            lbl.Margin = new Thickness(5);
+                            QuestionError.Child = lbl;
+                        }
+                        else if (AnswerNotEnterd != 0)
+                        {
+                            Label lbl = new Label();
+                            lbl.Content = "You have " + AnswerNotEnterd + " questions without answers";
+                            lbl.Foreground = Brushes.Red;
+                            lbl.BorderBrush = Brushes.Red;
+                            lbl.BorderThickness = new Thickness(1);
+                            lbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                            lbl.VerticalAlignment = VerticalAlignment.Stretch;
+                            lbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                            lbl.VerticalContentAlignment = VerticalAlignment.Center;
+                            lbl.Margin = new Thickness(5);
+                            AnswerError.Child = lbl;
+                        }
+                        else
+                        {
+                            int CorrectNotAnswerd = 0;
+                            foreach (var item in mydata.NewQuizQuestion)
+                            {
+                                if (item.CAnswer == 0)
+                                {
+                                    CorrectNotAnswerd++;
+                                }
+                            }
+                            if (CorrectNotAnswerd != 0)
+                            {
+                                Label lbl = new Label();
+                                lbl.Content = "You have " + CorrectNotAnswerd + " questions without a correct answer";
+                                lbl.Foreground = Brushes.Red;
+                                lbl.BorderBrush = Brushes.Red;
+                                lbl.BorderThickness = new Thickness(1);
+                                lbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                                lbl.VerticalAlignment = VerticalAlignment.Stretch;
+                                lbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                                lbl.VerticalContentAlignment = VerticalAlignment.Center;
+                                lbl.Margin = new Thickness(5);
+                                CorrectError.Child = lbl;
+                            }
+                            else
+                            {
+                                fc.SaveNewQuiz();
+                                this.Close();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.Content = "You can't save a quiz with no questions";
+                        lbl.Foreground = Brushes.Red;
+                        lbl.BorderBrush = Brushes.Red;
+                        lbl.BorderThickness = new Thickness(1);
+                        lbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        lbl.VerticalAlignment = VerticalAlignment.Stretch;
+                        lbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                        lbl.VerticalContentAlignment = VerticalAlignment.Center;
+                        lbl.Margin = new Thickness(5);
+                        NoRowError.Child = lbl;
+                    }
                 }
                 else
                 {
-                    Label txbl = new Label();
-                    txbl.Content = "This name already excists";
-                    txbl.Foreground = Brushes.Red;
-                    txbl.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    txbl.VerticalAlignment = VerticalAlignment.Stretch;
-                    txbl.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    txbl.VerticalContentAlignment = VerticalAlignment.Center;
-                    txbl.BorderBrush = Brushes.Red;
-                    txbl.BorderThickness = new Thickness(1);
-                    txbl.Margin = new Thickness(5);
-                    NameError.Child = txbl;
+                    if (mydata.NewQuizName == "Enter quiz title here")
+                    {
+                        Label txbl = new Label();
+                        txbl.Content = "Please give the quiz a name";
+                        txbl.Foreground = Brushes.Red;
+                        txbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        txbl.VerticalAlignment = VerticalAlignment.Stretch;
+                        txbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                        txbl.VerticalContentAlignment = VerticalAlignment.Center;
+                        txbl.BorderBrush = Brushes.Red;
+                        txbl.BorderThickness = new Thickness(1);
+                        txbl.Margin = new Thickness(5);
+                        NameError.Child = txbl;
+                    }
+                    else
+                    {
+                        Label txbl = new Label();
+                        txbl.Content = "This name already excists";
+                        txbl.Foreground = Brushes.Red;
+                        txbl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        txbl.VerticalAlignment = VerticalAlignment.Stretch;
+                        txbl.HorizontalContentAlignment = HorizontalAlignment.Center;
+                        txbl.VerticalContentAlignment = VerticalAlignment.Center;
+                        txbl.BorderBrush = Brushes.Red;
+                        txbl.BorderThickness = new Thickness(1);
+                        txbl.Margin = new Thickness(5);
+                        NameError.Child = txbl;
+
+                    }
                 }
             }
         }
@@ -222,8 +345,57 @@ namespace Quiztime.Pages
             mydata.NewQuizQuestion[Convert.ToInt32(((IntegerUpDown)sender).Tag) - 1].Timer = (int)((IntegerUpDown)sender).Value;
         }
 
-        private void AmountChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private async void AmountChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            List<TextBox> tblist = new List<TextBox>();
+            List<RadioButton> rblist = new List<RadioButton>();
+            await Task.Delay(1);
+            foreach (TextBox tb in FindVisualChildren<TextBox>(QuizGrid))
+            {
+                if (Convert.ToInt32(tb.Tag) == Convert.ToInt32(((IntegerUpDown)sender).Tag))
+                {
+                    if (tb.Name == "_1")
+                    {
+                        tblist.Add(tb);
+                    }
+                    else if (tb.Name == "_2")
+                    {
+                        tblist.Add(tb);
+                    }
+                    else if (tb.Name == "_3")
+                    {
+                        tblist.Add(tb);
+                    }
+                    else if (tb.Name == "_4")
+                    {
+                        tblist.Add(tb);
+                    }
+                }
+            }
+            foreach (RadioButton rb in FindVisualChildren<RadioButton>(QuizGrid))
+            {
+                if (Convert.ToInt32(rb.GroupName) == Convert.ToInt32(((IntegerUpDown)sender).Tag))
+                {
+                    rblist.Add(rb);
+                }
+            }
+            if (tblist.Count == 4 && rblist.Count == 4)
+            {
+                for (int i = 4; i > ((IntegerUpDown)sender).Value; i--)
+                {
+                    tblist[i - 1].Visibility = Visibility.Collapsed;
+                    tblist[i - 1].Text = null;
+                    rblist[i - 1].Visibility = Visibility.Collapsed;
+                    rblist[i - 1].IsChecked = false;
+
+                }
+                for (int i = 0; i < ((IntegerUpDown)sender).Value; i++)
+                {
+                    tblist[i].Visibility = Visibility.Visible;
+                    rblist[i].Visibility = Visibility.Visible;
+                }
+
+            }
             mydata.NewQuizQuestion[Convert.ToInt32(((IntegerUpDown)sender).Tag) - 1].Amount = (int)((IntegerUpDown)sender).Value;
         }
 
