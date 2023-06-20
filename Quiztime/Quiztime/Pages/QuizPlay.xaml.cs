@@ -22,6 +22,7 @@ namespace Quiztime.Pages
     {
         public QuizPlay()
         {
+            List<string> list = new List<string>();
             InitializeComponent();
             if (mydata.SelectedQuiz != 0)
             {
@@ -30,37 +31,24 @@ namespace Quiztime.Pages
                     if (item.Id == mydata.SelectedQuiz)
                     {
                         QuizTitle.Text = item.Name;
+                        list.Add(item.Picture);
                     }
                 }
             }
-
-            StartTimer();
             StartCounter();
-
+            MovePRSB();
         }
 
-        readonly int TimeDelay = 10;
-
-        private async void StartTimer()
-        {
-            while (TimerProgressbar.EndAngle > 0)
-            {
-                await Task.Delay(1000);
-                MovePRSB();
-
-            }
-
-        }
+        readonly int TimeDelay = 4;
 
         private async void MovePRSB()
         {
-            for (int i = 0; i < 360 / TimeDelay; i++)
+            double test = (double)360 / 1000 * 100 / TimeDelay;
+            Console.WriteLine(test);
+            while (TimerProgressbar.EndAngle > 0)
             {
-                if (TimerProgressbar.EndAngle > 0)
-                {
-                    TimerProgressbar.EndAngle--;
-                    await Task.Delay(1);
-                }
+                await Task.Delay(100);
+                TimerProgressbar.EndAngle -= test;
             }
         }
 

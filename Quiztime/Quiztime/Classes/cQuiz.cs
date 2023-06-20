@@ -31,4 +31,52 @@ namespace Quiztime.Classes
         public int CAnswer { get; set; }
         public int Timer { get; set; }
     }
+
+    public class ExcistingQuiz
+    {
+        public static List<ExcistingQuiz> excistingQuizzes = new List<ExcistingQuiz>();
+        public ExcistingQuiz() { }
+        public int DBId { get; set; }
+        public int LocalId { get; set; }
+        public string QuizName { get; set; }
+        public string Picture { get; set; }
+        public DateTime Updated { get; set; }
+        public virtual List<QuizQuestions> QuizQuestions{ get; set; }
+    }
+    public class QuizQuestions
+    {
+        public QuizQuestions() { }
+
+        public string Question { get; set; }
+        public string Picture { get; set; }
+        public int Timer { get; set; }
+
+        public virtual List<QuizAnswers> QuizAnswers { get; set; }
+    }
+
+    public class QuizAnswers
+    {
+        public QuizAnswers() { }
+        public string Answer { get; set; }
+        public int Correct { get; set; }
+    }
+    public class Box
+    {
+        public Box() { }
+
+        public int BoxId { get; set; }
+        public string BoxName { get; set; }
+
+        public virtual List<Item> Item { get; set; }
+    }
+
+    public class Item
+    {
+        public Item()
+        {
+        }
+        public int ItemId { get; set; }
+        public string Description { get; set; }
+
+    }
 }

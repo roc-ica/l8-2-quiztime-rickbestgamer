@@ -24,20 +24,22 @@ namespace Quiztime
     {
         public MainWindow()
         {
+            Blog blog = new Blog();
+            blog.Posts.Add(new Post());
+            blog.Posts[0].Add(new Post());
             InitializeComponent();
             mydata md = new mydata();
-            md.Test();
-            QuizGrid.ItemsSource = mydata.Quiz;
-
-
+            md.GetDBData();
+            QuizGrid.ItemsSource = ExcistingQuiz.excistingQuizzes;
+            
         }
 
          private void OpenQuiz(object sender, RoutedEventArgs e)
         {
-            mydata.QuizMode = 3;
-            mydata.SelectedQuiz = (int)((Button)sender).Tag;
-            Window QuizPlay = new QuizPlay();
-            QuizPlay.Show();
+            //mydata.QuizMode = 3;
+            //mydata.SelectedQuiz = (int)((Button)sender).Tag;
+            //Window QuizPlay = new QuizPlay();
+            //QuizPlay.Show();
         }
 
         private void CheckQuiz(object sender, RoutedEventArgs e)

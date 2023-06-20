@@ -19,16 +19,19 @@ namespace Quiztime.Classes
         public static Int32 SelectedQuiz;
         public static Int32 QuizMode;
         private MySqlConnection Conn;
+        private MySqlConnection Conn2;
         public mydata()
         {
             string myConnectionString = "server=localhost;uid=root;" +
                 "pwd=;database=quiztimedb";
-
             try
             {
                 Conn = new MySqlConnection();
                 Conn.ConnectionString = myConnectionString;
                 Conn.Open();
+                Conn2 = new MySqlConnection();
+                Conn2.ConnectionString = myConnectionString;
+                Conn2.Open();
             }
             catch (MySqlException ex)
             {
@@ -36,12 +39,55 @@ namespace Quiztime.Classes
             }
         }
 
+        public void GetDBData()
+        {
+            string SQL = @"SELECT * FROM `quiz`";
+            MySqlCommand CMD = new MySqlCommand(SQL, Conn);
+            MySqlDataReader Reader = CMD.ExecuteReader();
+            List<ExcistingQuiz> quizez = ExcistingQuiz.excistingQuizzes;
+            while (Reader.Read())
+            {
+                quizez.Add(new ExcistingQuiz());
+                ExcistingQuiz quiz = quizez[quizez.Count - 1];
+                quiz.DBId = (int)Reader["IdQuiz"];
+                quiz.LocalId = quizez.Count;
+                quiz.Updated = (DateTime)Reader["Updated"];
+                quiz.Picture = (string)Reader["Picture"];
+                quiz.QuizName = (string)Reader["QuizName"];
+
+                string SQL2 = @"SELECT * FROM `questions` WHERE `Quiz_IdQuiz` = @IdQuiz";
+                MySqlCommand CMD2 = new MySqlCommand(SQL2, Conn2);
+                CMD2.Parameters.Add("@IdQuiz", MySqlDbType.VarChar).Value = (int)Reader["IdQuiz"];
+                MySqlDataReader Reader2 = CMD2.ExecuteReader();
+                ICollection<QuizQuestions> quizQuestions = quizez[quizez.Count - 1].QuizQuestions;
+                while (Reader2.Read())
+                {
+                    ExcistingQuiz.excistingQuizzes[ExcistingQuiz.excistingQuizzes.Count - 1].QuizQuestions.Add(new QuizQuestions());
+                    //QuizQuestions question = quizQuestions[quizQuestions.Count - 1];
+                    //question.Question = (string)Reader2["Question"];
+                    //question.Picture = (string)Reader2["Picture"];
+                    //question.Timer = (int)Reader2["Timer"];
+
+                    string SQL3 = @"SELECT * FROM `answers` WHERE `Questions_IdQuestions` = @IdQuestion AND `Questions_Quiz_IdQuiz` = @IdQuiz";
+                    MySqlCommand cmd3 = new MySqlCommand(SQL3, Conn);
+                    cmd3.Parameters.Add("@IdQuestion", MySqlDbType.VarChar).Value = (int)Reader2["IdQuestions"];
+                    cmd3.Parameters.Add("@IdQuiz", MySqlDbType.VarChar).Value = (int)Reader2["IdQuiz"];
+                    MySqlDataReader Reader3 = cmd3.ExecuteReader();
+                    while (Reader3.Read())
+                    {
+                        //question.QuizAnswers.Add(new QuizAnswers());
+                        //QuizAnswers quizAnswers = question.QuizAnswers[question.QuizAnswers.Count];
+                        //quizAnswers.Answer = (string)Reader3["Answer"];
+                        //quizAnswers.Correct = (int)Reader3["Correct"];
+                    }
+                }
+            }
+        }
+
         public void Test()
         {
             string sql = @"select * from quiz";
             MySqlCommand cmd = new MySqlCommand(sql, Conn);
-            //cmd.Parameters.Add("@name",MySqlDbType.VarChar).Value = name;
-            //cmd.Parameters.Add("@picture", MySqlType.VarChar).Value = surname;
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -105,8 +151,9 @@ namespace Quiztime.Classes
                 MySqlDataReader Reader2 = cmd4.ExecuteReader();
                 while (Reader2.Read())
                 {
-                    SQLQuizId = (int)Reader2["IdQuestions"];
+                    SQLQuestionId = (int)Reader2["IdQuestions"];
                 }
+                Reader2.Close();
                 string sql5 = @"INSERT INTO `answers`(`Answer`, `Correct`, `Questions_IdQuestions`, `Questions_Quiz_IdQuiz`) VALUES (@Answer, @Correct, @QuestionId, @QuizId)";
                 MySqlCommand cmd5 = new MySqlCommand(sql5, Conn);
                 if (item.Amount >= 1)
