@@ -39,26 +39,26 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding QuizName}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding Updated}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTemplateColumn IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Start Quiz" Tag="{Binding Id}" Click="OpenQuiz" Style="{DynamicResource Button}"/>
+                            <Button Content="Start Quiz" Tag="{Binding LocalId}" Click="OpenQuiz" Style="{DynamicResource Button}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Check Quiz" Tag="{Binding Id}" Click="CheckQuiz" Style="{DynamicResource Button}"/>
+                            <Button Content="Check Quiz" Tag="{Binding LocalId}" Click="CheckQuiz" Style="{DynamicResource Button}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit Quiz" Tag="{Binding Id}" Click="EditQuiz" Style="{DynamicResource Button}"/>
+                            <Button Content="Edit Quiz" Tag="{Binding LocalId}" Click="EditQuiz" Style="{DynamicResource Button}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

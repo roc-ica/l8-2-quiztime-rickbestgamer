@@ -139,7 +139,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\controls.xaml">
+    <Page Include="Pages\Controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,8 +157,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\controls.xaml.cs">
-      <DependentUpon>controls.xaml</DependentUpon>
+    <Compile Include="Pages\Controls.xaml.cs">
+      <DependentUpon>Controls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QuizCreate.xaml.cs">
       <DependentUpon>QuizCreate.xaml</DependentUpon>
@@ -202,6 +202,11 @@
   <ItemGroup>
     <Resource Include="Media\quiz.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Media\The song of achilles backside.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\Monique-van-Zijtveld.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,10 +23,7 @@ namespace Quiztime
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
-            Blog blog = new Blog();
-            blog.Posts.Add(new Post());
-            blog.Posts[0].Add(new Post());
+        {;
             InitializeComponent();
             mydata md = new mydata();
             md.GetDBData();
@@ -36,10 +33,12 @@ namespace Quiztime
 
          private void OpenQuiz(object sender, RoutedEventArgs e)
         {
-            //mydata.QuizMode = 3;
-            //mydata.SelectedQuiz = (int)((Button)sender).Tag;
-            //Window QuizPlay = new QuizPlay();
-            //QuizPlay.Show();
+            mydata.QuizMode = 3;
+            mydata.SelectedQuiz = (int)((Button)sender).Tag;
+            mydata.SelectedQuestion = 1;
+            Window QuizPlayControl = new Controls();
+            QuizPlayControl.Show();
+            
         }
 
         private void CheckQuiz(object sender, RoutedEventArgs e)

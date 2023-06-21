@@ -20,18 +20,107 @@ namespace Quiztime.Pages
     /// </summary>
     public partial class QuizPlay : Window
     {
+        int TimeDelay;
         public QuizPlay()
         {
-            List<string> list = new List<string>();
             InitializeComponent();
             if (mydata.SelectedQuiz != 0)
             {
-                foreach (var item in mydata.Quiz)
+                foreach (var item in ExcistingQuiz.excistingQuizzes)
                 {
-                    if (item.Id == mydata.SelectedQuiz)
+                    if (item.LocalId == mydata.SelectedQuiz)
                     {
-                        QuizTitle.Text = item.Name;
-                        list.Add(item.Picture);
+                        QuizTitle.Text = item.QuizName;
+                        TitleQuestion.Text = item.QuizQuestions[mydata.SelectedQuestion - 1].Question;
+                        if (item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers.Count == 4)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 2);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 2);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 2);
+                            BorderA3.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Visible;
+                        }
+                        else if (item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers.Count == 3)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 2);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 2);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 5);
+                            BorderA3.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Collapsed;
+                        }
+                        else if (item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers.Count == 2)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 5);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 5);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 5);
+                            BorderA3.Visibility = Visibility.Collapsed;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Collapsed;
+                        }
+                        foreach (var item1 in item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers)
+                        {
+                            if (item1.LocalId == 1)
+                            {
+                                Answer1.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 2)
+                            {
+                                Answer2.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 3)
+                            {
+                                Answer3.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 4)
+                            {
+                                Answer4.Text = item1.Answer;
+                            }
+                        }
+                        TimeDelay = item.QuizQuestions[mydata.SelectedQuestion - 1].Timer;
                     }
                 }
             }
@@ -39,16 +128,125 @@ namespace Quiztime.Pages
             MovePRSB();
         }
 
-        readonly int TimeDelay = 4;
+        public void NextQuestion()
+        {
+            if (mydata.SelectedQuiz != 0)
+            {
+                foreach (var item in ExcistingQuiz.excistingQuizzes)
+                {
+                    if (item.LocalId == mydata.SelectedQuiz)
+                    {
+                        QuizTitle.Text = item.QuizName;
+                        TitleQuestion.Text = item.QuizQuestions[mydata.SelectedQuestion - 1].Question;
+                        if (item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers.Count == 4)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 2);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 2);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 2);
+                            BorderA3.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Visible;
+                        }
+                        else if (item.QuizQuestions[mydata.SelectedQuestion - 1].QuizAnswers.Count == 3)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 2);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 2);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 5);
+                            BorderA3.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Collapsed;
+                        }
+                        else if (item.QuizQuestions[mydata.SelectedQuestion-1].QuizAnswers.Count == 2)
+                        {
+                            Grid.SetRow(BorderA1, 1);
+                            Grid.SetRowSpan(BorderA1, 5);
+                            Grid.SetColumn(BorderA1, 1);
+                            Grid.SetColumnSpan(BorderA1, 2);
+                            BorderA1.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA2, 1);
+                            Grid.SetRowSpan(BorderA2, 5);
+                            Grid.SetColumn(BorderA2, 4);
+                            Grid.SetColumnSpan(BorderA2, 2);
+                            BorderA2.Visibility = Visibility.Visible;
+                            Grid.SetRow(BorderA3, 3);
+                            Grid.SetRowSpan(BorderA3, 2);
+                            Grid.SetColumn(BorderA3, 1);
+                            Grid.SetColumnSpan(BorderA3, 5);
+                            BorderA3.Visibility = Visibility.Collapsed;
+                            Grid.SetRow(BorderA4, 3);
+                            Grid.SetRowSpan(BorderA4, 2);
+                            Grid.SetColumn(BorderA4, 4);
+                            Grid.SetColumnSpan(BorderA4, 2);
+                            BorderA4.Visibility = Visibility.Collapsed;
+                        }
+                        foreach (var item1 in item.QuizQuestions[mydata.SelectedQuestion-1].QuizAnswers)
+                        {
+                            if (item1.LocalId == 1)
+                            {
+                                Answer1.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 2)
+                            {
+                                Answer2.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 3)
+                            {
+                                Answer3.Text = item1.Answer;
+                            }
+                            if (item1.LocalId == 4)
+                            {
+                                Answer4.Text = item1.Answer;
+                            }
+                        }
+                        TimeDelay = item.QuizQuestions[mydata.SelectedQuestion - 1].Timer;
+                        MovePRSB();
+                        StartCounter();
+                    }
+                }
+            }
+        }
+
 
         private async void MovePRSB()
         {
+            TimerProgressbar.EndAngle = 360;
             double test = (double)360 / 1000 * 100 / TimeDelay;
-            Console.WriteLine(test);
             while (TimerProgressbar.EndAngle > 0)
             {
                 await Task.Delay(100);
                 TimerProgressbar.EndAngle -= test;
+                if (TimerProgressbar.EndAngle <= 0)
+                {
+                    mydata.QuizActive = false;
+                }
             }
         }
 

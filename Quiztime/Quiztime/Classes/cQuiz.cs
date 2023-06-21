@@ -59,6 +59,7 @@ namespace Quiztime.Classes
         public QuizAnswers() { }
         public string Answer { get; set; }
         public int Correct { get; set; }
+        public int LocalId { get; set; }
     }
     public class Box
     {

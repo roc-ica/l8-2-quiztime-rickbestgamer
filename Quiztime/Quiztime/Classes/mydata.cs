@@ -17,9 +17,12 @@ namespace Quiztime.Classes
         public static List<cQuiz> Quiz = new List<cQuiz>();
         public static List<NewQuizQuestions> NewQuizQuestion = new List<NewQuizQuestions>();
         public static Int32 SelectedQuiz;
+        public static Int32 SelectedQuestion;
+        public static bool QuizActive = false;
         public static Int32 QuizMode;
         private MySqlConnection Conn;
         private MySqlConnection Conn2;
+        private MySqlConnection Conn3;
         public mydata()
         {
             string myConnectionString = "server=localhost;uid=root;" +
@@ -32,6 +35,9 @@ namespace Quiztime.Classes
                 Conn2 = new MySqlConnection();
                 Conn2.ConnectionString = myConnectionString;
                 Conn2.Open();
+                Conn3 = new MySqlConnection();
+                Conn3.ConnectionString = myConnectionString;
+                Conn3.Open();
             }
             catch (MySqlException ex)
             {
@@ -47,10 +53,10 @@ namespace Quiztime.Classes
             List<ExcistingQuiz> quizez = ExcistingQuiz.excistingQuizzes;
             while (Reader.Read())
             {
-                quizez.Add(new ExcistingQuiz());
-                ExcistingQuiz quiz = quizez[quizez.Count - 1];
+                ExcistingQuiz quiz = new ExcistingQuiz();
+                quiz.QuizQuestions = new List<QuizQuestions>();
                 quiz.DBId = (int)Reader["IdQuiz"];
-                quiz.LocalId = quizez.Count;
+                quiz.LocalId = quizez.Count + 1;
                 quiz.Updated = (DateTime)Reader["Updated"];
                 quiz.Picture = (string)Reader["Picture"];
                 quiz.QuizName = (string)Reader["QuizName"];
@@ -59,29 +65,33 @@ namespace Quiztime.Classes
                 MySqlCommand CMD2 = new MySqlCommand(SQL2, Conn2);
                 CMD2.Parameters.Add("@IdQuiz", MySqlDbType.VarChar).Value = (int)Reader["IdQuiz"];
                 MySqlDataReader Reader2 = CMD2.ExecuteReader();
-                ICollection<QuizQuestions> quizQuestions = quizez[quizez.Count - 1].QuizQuestions;
                 while (Reader2.Read())
                 {
-                    ExcistingQuiz.excistingQuizzes[ExcistingQuiz.excistingQuizzes.Count - 1].QuizQuestions.Add(new QuizQuestions());
-                    //QuizQuestions question = quizQuestions[quizQuestions.Count - 1];
-                    //question.Question = (string)Reader2["Question"];
-                    //question.Picture = (string)Reader2["Picture"];
-                    //question.Timer = (int)Reader2["Timer"];
-
+                    QuizQuestions question = new QuizQuestions();
+                    question.Question = (string)Reader2["Question"];
+                    question.Picture = (string)Reader2["Picture"];
+                    question.Timer = (int)Reader2["Timer"];
+                    question.QuizAnswers = new List<QuizAnswers>();
                     string SQL3 = @"SELECT * FROM `answers` WHERE `Questions_IdQuestions` = @IdQuestion AND `Questions_Quiz_IdQuiz` = @IdQuiz";
-                    MySqlCommand cmd3 = new MySqlCommand(SQL3, Conn);
+                    MySqlCommand cmd3 = new MySqlCommand(SQL3, Conn3);
                     cmd3.Parameters.Add("@IdQuestion", MySqlDbType.VarChar).Value = (int)Reader2["IdQuestions"];
-                    cmd3.Parameters.Add("@IdQuiz", MySqlDbType.VarChar).Value = (int)Reader2["IdQuiz"];
+                    cmd3.Parameters.Add("@IdQuiz", MySqlDbType.VarChar).Value = (int)Reader["IdQuiz"];
                     MySqlDataReader Reader3 = cmd3.ExecuteReader();
                     while (Reader3.Read())
                     {
-                        //question.QuizAnswers.Add(new QuizAnswers());
-                        //QuizAnswers quizAnswers = question.QuizAnswers[question.QuizAnswers.Count];
-                        //quizAnswers.Answer = (string)Reader3["Answer"];
-                        //quizAnswers.Correct = (int)Reader3["Correct"];
+                        QuizAnswers quizAnswers = new QuizAnswers();
+                        quizAnswers.LocalId = question.QuizAnswers.Count + 1;
+                        quizAnswers.Answer = (string)Reader3["Answer"];
+                        quizAnswers.Correct = Reader3.GetInt16(Reader3.GetOrdinal("Correct"));
+                        question.QuizAnswers.Add(quizAnswers);
                     }
+                    Reader3.Close();
+                    quiz.QuizQuestions.Add(question);
                 }
+                Reader2.Close();
+                ExcistingQuiz.excistingQuizzes.Add(quiz);
             }
+            Reader.Close();
         }
 
         public void Test()
@@ -110,7 +120,7 @@ namespace Quiztime.Classes
             }
             else
             {
-                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = CoverPicture;
+                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = "/Media/" + CoverPicture;
             }
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.ExecuteNonQuery();
@@ -138,7 +148,7 @@ namespace Quiztime.Classes
                 {
                     cmd3.Parameters.Add("@Name", MySqlDbType.VarChar).Value = item.Question;
                 }
-                cmd3.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = item.Picture;
+                cmd3.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = "/Media/" + item.Picture;
                 cmd3.Parameters.Add("@Timer", MySqlDbType.VarChar).Value = item.Timer;
                 cmd3.Parameters.Add("@Id", MySqlDbType.VarChar).Value = SQLQuizId;
                 cmd3.CommandType = System.Data.CommandType.Text;

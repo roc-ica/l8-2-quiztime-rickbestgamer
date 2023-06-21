@@ -93,22 +93,22 @@
                         <TextBlock x:Name="TitleQuestion" Foreground="White" Text="Title of the question"/>
                     </Viewbox>
                 </Border>
-                <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Red" CornerRadius="10,10,10,10" Margin="0,10,0,10">
+                <Border x:Name="BorderA1" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Red" CornerRadius="10,10,10,10" Margin="0,10,0,10">
                     <Viewbox>
                         <TextBlock x:Name="Answer1" Foreground="White" Text="Answer 1"/>
                     </Viewbox>
                 </Border>
-                <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Background="Orange" CornerRadius="10,10,10,10" Margin="0,10,0,10">
+                <Border x:Name="BorderA2" Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Background="Orange" CornerRadius="10,10,10,10" Margin="0,10,0,10">
                     <Viewbox>
                         <TextBlock x:Name="Answer2" Foreground="White" Text="Answer 2"/>
                     </Viewbox>
                 </Border>
-                <Border Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Blue" CornerRadius="10,10,10,10" Margin="0,10,0,10">
+                <Border x:Name="BorderA3" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Blue" CornerRadius="10,10,10,10" Margin="0,10,0,10">
                     <Viewbox>
                         <TextBlock x:Name="Answer3" Foreground="White" Text="Answer 3"/>
                     </Viewbox>
                 </Border>
-                <Border Grid.Row="3" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Background="Green" CornerRadius="10,10,10,10" Margin="0,10,0,10">
+                <Border x:Name="BorderA4" Grid.Row="3" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Background="Green" CornerRadius="10,10,10,10" Margin="0,10,0,10">
                     <Viewbox>
                         <TextBlock x:Name="Answer4" Foreground="White" Text="Answer 4"/>
                     </Viewbox>

@@ -51,7 +51,6 @@ namespace Quiztime.Pages
             await Task.Delay(1);
             foreach (RadioButton tb in FindVisualChildren<RadioButton>(this))
             {
-                Console.WriteLine(tb);
                 if (int.Parse((string)tb.Tag) == mydata.NewQuizQuestion[int.Parse(tb.GroupName) - 1].CAnswer)
                 {
                     tb.IsChecked = true;
@@ -101,7 +100,7 @@ namespace Quiztime.Pages
         private void AddPicture(object sender, RoutedEventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
-            file.Filter = "Image files|*.bmp;*.jpg;*.jepg;*.gif;*.png";
+            file.Filter = "Image files|*.bmp;*.jpg;*.jepg;*.png";
             file.FilterIndex = 1;
             if (file.ShowDialog() == true)
             {
@@ -325,7 +324,7 @@ namespace Quiztime.Pages
         private void AddCoverPicture(object sender, RoutedEventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
-            file.Filter = "Image files|*.bmp;*.jpg;*.jepg;*.gif;*.png";
+            file.Filter = "Image files|*.bmp;*.jpg;*.jepg;*.png";
             file.FilterIndex = 1;
             if (file.ShowDialog() == true)
             {
