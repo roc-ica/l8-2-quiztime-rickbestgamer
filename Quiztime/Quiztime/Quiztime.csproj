@@ -208,5 +208,8 @@
   <ItemGroup>
     <Resource Include="Media\Monique-van-Zijtveld.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\test.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

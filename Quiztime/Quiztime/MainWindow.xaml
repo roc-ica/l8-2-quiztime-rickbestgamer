@@ -32,30 +32,30 @@
         <ItemsControl Grid.ColumnSpan="9" Style="{DynamicResource MainGrid}"></ItemsControl>
         <DataGrid x:Name="QuizGrid" Grid.Row="1" Grid.RowSpan="7" Grid.Column="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" Style="{DynamicResource QuizGrid}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Picture" IsReadOnly="True" Width="*">
+                <DataGridTemplateColumn Header="Picture" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Picture}"/>
+                            <Image Source="{Binding Picture}" MaxHeight="100"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding QuizName}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding Updated}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTemplateColumn IsReadOnly="True">
+                <DataGridTemplateColumn IsReadOnly="True" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Start Quiz" Tag="{Binding LocalId}" Click="OpenQuiz" Style="{DynamicResource Button}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn IsReadOnly="True">
+                <DataGridTemplateColumn IsReadOnly="True" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Check Quiz" Tag="{Binding LocalId}" Click="CheckQuiz" Style="{DynamicResource Button}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn IsReadOnly="True">
+                <DataGridTemplateColumn IsReadOnly="True" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Edit Quiz" Tag="{Binding LocalId}" Click="EditQuiz" Style="{DynamicResource Button}"/>

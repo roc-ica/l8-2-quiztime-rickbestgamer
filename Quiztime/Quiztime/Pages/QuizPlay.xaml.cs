@@ -120,6 +120,11 @@ namespace Quiztime.Pages
                                 Answer4.Text = item1.Answer;
                             }
                         }
+                        BitmapImage image = new BitmapImage();
+                        image.BeginInit();
+                        image.UriSource = new Uri(item.QuizQuestions[mydata.SelectedQuestion - 1].Picture);
+                        image.EndInit();
+                        QuestionImage.Source = image;
                         TimeDelay = item.QuizQuestions[mydata.SelectedQuestion - 1].Timer;
                     }
                 }
@@ -227,6 +232,11 @@ namespace Quiztime.Pages
                             }
                         }
                         TimeDelay = item.QuizQuestions[mydata.SelectedQuestion - 1].Timer;
+                        BitmapImage image = new BitmapImage();
+                        image.BeginInit();
+                        image.UriSource = new Uri(item.QuizQuestions[mydata.SelectedQuestion - 1].Picture);
+                        image.EndInit();
+                        QuestionImage.Source = image;
                         MovePRSB();
                         StartCounter();
                     }

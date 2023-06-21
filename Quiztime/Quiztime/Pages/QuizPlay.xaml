@@ -29,7 +29,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Media/quiz.jpg"/>
+        <Image x:Name="QuestionImage" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Media/quiz.jpg"/>
         <Border Grid.ColumnSpan="10" BorderThickness="2" CornerRadius="5">
             <Border.Background>
                 <RadialGradientBrush GradientOrigin="0,0">

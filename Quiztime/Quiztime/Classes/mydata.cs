@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace Quiztime.Classes
                 quiz.DBId = (int)Reader["IdQuiz"];
                 quiz.LocalId = quizez.Count + 1;
                 quiz.Updated = (DateTime)Reader["Updated"];
-                quiz.Picture = (string)Reader["Picture"];
+                quiz.Picture = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", (string)Reader["Picture"]);
                 quiz.QuizName = (string)Reader["QuizName"];
 
                 string SQL2 = @"SELECT * FROM `questions` WHERE `Quiz_IdQuiz` = @IdQuiz";
@@ -69,7 +70,7 @@ namespace Quiztime.Classes
                 {
                     QuizQuestions question = new QuizQuestions();
                     question.Question = (string)Reader2["Question"];
-                    question.Picture = (string)Reader2["Picture"];
+                    question.Picture = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, @"Media\", (string)Reader2["Picture"]);
                     question.Timer = (int)Reader2["Timer"];
                     question.QuizAnswers = new List<QuizAnswers>();
                     string SQL3 = @"SELECT * FROM `answers` WHERE `Questions_IdQuestions` = @IdQuestion AND `Questions_Quiz_IdQuiz` = @IdQuiz";
@@ -120,7 +121,7 @@ namespace Quiztime.Classes
             }
             else
             {
-                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = "/Media/" + CoverPicture;
+                cmd.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = CoverPicture;
             }
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.ExecuteNonQuery();
@@ -148,7 +149,7 @@ namespace Quiztime.Classes
                 {
                     cmd3.Parameters.Add("@Name", MySqlDbType.VarChar).Value = item.Question;
                 }
-                cmd3.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = "/Media/" + item.Picture;
+                cmd3.Parameters.Add("@Picture", MySqlDbType.VarChar).Value = item.Picture;
                 cmd3.Parameters.Add("@Timer", MySqlDbType.VarChar).Value = item.Timer;
                 cmd3.Parameters.Add("@Id", MySqlDbType.VarChar).Value = SQLQuizId;
                 cmd3.CommandType = System.Data.CommandType.Text;
